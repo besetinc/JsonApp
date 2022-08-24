@@ -1,0 +1,16 @@
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\JsonApp.exe.config
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\JsonApp.exe
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\JsonApp.pdb
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\Newtonsoft.Json.Schema.dll
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Korisnik\source\repos\JsonApp\bin\Debug\Newtonsoft.Json.Schema.xml
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.csproj.AssemblyReference.cache
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.csproj.SuggestedBindingRedirects.cache
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.JsonApp.resources
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.Properties.Resources.resources
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.csproj.GenerateResource.cache
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.csproj.CoreCompileInputs.cache
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.csproj.CopyComplete
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.exe
+C:\Users\Korisnik\source\repos\JsonApp\obj\Debug\JsonApp.pdb
