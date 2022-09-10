@@ -4,6 +4,7 @@ using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -69,11 +70,40 @@ namespace JsonApp
             {
                 JObject jsonObject = JObject.Parse(inputJson);
                 PrintOutput(jsonObject.ToString());
+                JSchemaGenerator generator = new JSchemaGenerator();
+                JSchema schema = generator.Generate(typeof(Agents));
+                IList<string> validationMessages = new List<string>();
+                if (jsonObject.IsValid(schema, out validationMessages))
+                {
+                    PrintOutput("Json is valid.");
+                }
+                else
+                {
+                    foreach (string message in validationMessages)
+                    {
+                        PrintOutput(message);
+                    }
+                    PrintOutput("JSON is NOT valid.");
+                }
             }
             catch (Exception e)
             {
                 PrintOutput("Found a problem: " + e.Message.ToString());
             }
         }
+        public class Agents
+        {
+            [JsonProperty("machineName")]
+            public string Name { get; set; }
+            [JsonProperty("machineNumber")]
+            public int Number { get; set; }
+            [JsonProperty("isOnline")]
+            public bool Online { get; set; }
+            [JsonProperty("isReserved")]
+            public bool Reserved { get; set; }
+            [JsonProperty("isReservedBy")]
+            public string ReservedBy { get; set; }
+        }
     }
 }
+

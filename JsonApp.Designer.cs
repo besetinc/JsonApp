@@ -42,9 +42,11 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.inputJson);
-            this.groupBox1.Location = new System.Drawing.Point(21, 12);
+            this.groupBox1.Location = new System.Drawing.Point(15, 8);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(765, 175);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(850, 232);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Input";
@@ -54,11 +56,12 @@
             this.inputJson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputJson.Location = new System.Drawing.Point(24, 28);
+            this.inputJson.Location = new System.Drawing.Point(17, 19);
+            this.inputJson.Margin = new System.Windows.Forms.Padding(2);
             this.inputJson.Multiline = true;
             this.inputJson.Name = "inputJson";
             this.inputJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.inputJson.Size = new System.Drawing.Size(705, 124);
+            this.inputJson.Size = new System.Drawing.Size(808, 185);
             this.inputJson.TabIndex = 0;
             // 
             // validateButton
@@ -66,9 +69,10 @@
             this.validateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.validateButton.Location = new System.Drawing.Point(570, 197);
+            this.validateButton.Location = new System.Drawing.Point(696, 244);
+            this.validateButton.Margin = new System.Windows.Forms.Padding(2);
             this.validateButton.Name = "validateButton";
-            this.validateButton.Size = new System.Drawing.Size(110, 40);
+            this.validateButton.Size = new System.Drawing.Size(83, 45);
             this.validateButton.TabIndex = 1;
             this.validateButton.Text = "Validate";
             this.validateButton.UseVisualStyleBackColor = true;
@@ -79,9 +83,10 @@
             this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.resetButton.Location = new System.Drawing.Point(686, 197);
+            this.resetButton.Location = new System.Drawing.Point(783, 244);
+            this.resetButton.Margin = new System.Windows.Forms.Padding(2);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(110, 40);
+            this.resetButton.Size = new System.Drawing.Size(82, 45);
             this.resetButton.TabIndex = 2;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
@@ -90,9 +95,11 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.output);
-            this.groupBox2.Location = new System.Drawing.Point(21, 263);
+            this.groupBox2.Location = new System.Drawing.Point(15, 324);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(765, 175);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(850, 311);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Output";
@@ -102,19 +109,21 @@
             this.output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.output.Location = new System.Drawing.Point(24, 28);
+            this.output.Location = new System.Drawing.Point(17, 33);
+            this.output.Margin = new System.Windows.Forms.Padding(2);
             this.output.Multiline = true;
             this.output.Name = "output";
             this.output.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.output.Size = new System.Drawing.Size(705, 125);
+            this.output.Size = new System.Drawing.Size(808, 265);
             this.output.TabIndex = 0;
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(21, 197);
+            this.openFileButton.Location = new System.Drawing.Point(15, 244);
+            this.openFileButton.Margin = new System.Windows.Forms.Padding(2);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.openFileButton.Size = new System.Drawing.Size(110, 40);
+            this.openFileButton.Size = new System.Drawing.Size(92, 43);
             this.openFileButton.TabIndex = 4;
             this.openFileButton.Text = "Open file";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -123,14 +132,15 @@
             // JsonApp
             // 
             this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(897, 646);
             this.Controls.Add(this.openFileButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.validateButton);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "JsonApp";
             this.Text = "JsonApp";
             this.groupBox1.ResumeLayout(false);
