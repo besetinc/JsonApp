@@ -28,126 +28,151 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.inputJson = new System.Windows.Forms.TextBox();
-            this.validateButton = new System.Windows.Forms.Button();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.output = new System.Windows.Forms.TextBox();
-            this.openFileButton = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.SuspendLayout();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            inputJson = new System.Windows.Forms.TextBox();
+            validateButton = new System.Windows.Forms.Button();
+            resetButton = new System.Windows.Forms.Button();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            label1 = new System.Windows.Forms.Label();
+            this.jsonTreeView = new System.Windows.Forms.TreeView();
+            output = new System.Windows.Forms.TextBox();
+            openFileButton = new System.Windows.Forms.Button();
+            validateAgentsCheckBox = new System.Windows.Forms.CheckBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.inputJson);
-            this.groupBox1.Location = new System.Drawing.Point(15, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(850, 232);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Input";
+            groupBox1.Controls.Add(inputJson);
+            groupBox1.Location = new System.Drawing.Point(15, 10);
+            groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            groupBox1.Size = new System.Drawing.Size(850, 290);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Input";
             // 
             // inputJson
             // 
-            this.inputJson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputJson.Location = new System.Drawing.Point(17, 19);
-            this.inputJson.Margin = new System.Windows.Forms.Padding(2);
-            this.inputJson.Multiline = true;
-            this.inputJson.Name = "inputJson";
-            this.inputJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.inputJson.Size = new System.Drawing.Size(808, 185);
-            this.inputJson.TabIndex = 0;
+            inputJson.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            inputJson.Location = new System.Drawing.Point(17, 24);
+            inputJson.Margin = new System.Windows.Forms.Padding(2);
+            inputJson.Multiline = true;
+            inputJson.Name = "inputJson";
+            inputJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            inputJson.Size = new System.Drawing.Size(808, 230);
+            inputJson.TabIndex = 0;
             // 
             // validateButton
             // 
-            this.validateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.validateButton.Location = new System.Drawing.Point(696, 244);
-            this.validateButton.Margin = new System.Windows.Forms.Padding(2);
-            this.validateButton.Name = "validateButton";
-            this.validateButton.Size = new System.Drawing.Size(83, 45);
-            this.validateButton.TabIndex = 1;
-            this.validateButton.Text = "Validate";
-            this.validateButton.UseVisualStyleBackColor = true;
-            this.validateButton.Click += new System.EventHandler(this.ValidateButton_Click);
+            validateButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            validateButton.Location = new System.Drawing.Point(696, 305);
+            validateButton.Margin = new System.Windows.Forms.Padding(2);
+            validateButton.Name = "validateButton";
+            validateButton.Size = new System.Drawing.Size(83, 56);
+            validateButton.TabIndex = 1;
+            validateButton.Text = "Validate";
+            validateButton.UseVisualStyleBackColor = true;
+            validateButton.Click += ValidateButton_Click;
             // 
             // resetButton
             // 
-            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.resetButton.Location = new System.Drawing.Point(783, 244);
-            this.resetButton.Margin = new System.Windows.Forms.Padding(2);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(82, 45);
-            this.resetButton.TabIndex = 2;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            resetButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            resetButton.Location = new System.Drawing.Point(783, 305);
+            resetButton.Margin = new System.Windows.Forms.Padding(2);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new System.Drawing.Size(82, 56);
+            resetButton.TabIndex = 2;
+            resetButton.Text = "Reset";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += ResetButton_Click;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.output);
-            this.groupBox2.Location = new System.Drawing.Point(15, 324);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(850, 311);
-            this.groupBox2.TabIndex = 3;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Output";
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(this.jsonTreeView);
+            groupBox2.Controls.Add(output);
+            groupBox2.Location = new System.Drawing.Point(15, 426);
+            groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            groupBox2.Size = new System.Drawing.Size(850, 371);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Output";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(17, 112);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(108, 20);
+            label1.TabIndex = 2;
+            label1.Text = "JSON hierarchy";
+            // 
+            // jsonTreeView
+            // 
+            this.jsonTreeView.Location = new System.Drawing.Point(17, 135);
+            this.jsonTreeView.Name = "jsonTreeView";
+            this.jsonTreeView.Size = new System.Drawing.Size(808, 182);
+            this.jsonTreeView.TabIndex = 1;
             // 
             // output
             // 
-            this.output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.output.Location = new System.Drawing.Point(17, 33);
-            this.output.Margin = new System.Windows.Forms.Padding(2);
-            this.output.Multiline = true;
-            this.output.Name = "output";
-            this.output.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.output.Size = new System.Drawing.Size(808, 265);
-            this.output.TabIndex = 0;
+            output.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            output.Location = new System.Drawing.Point(17, 41);
+            output.Margin = new System.Windows.Forms.Padding(2);
+            output.Multiline = true;
+            output.Name = "output";
+            output.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            output.Size = new System.Drawing.Size(808, 52);
+            output.TabIndex = 0;
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(15, 244);
-            this.openFileButton.Margin = new System.Windows.Forms.Padding(2);
-            this.openFileButton.Name = "openFileButton";
-            this.openFileButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.openFileButton.Size = new System.Drawing.Size(92, 43);
-            this.openFileButton.TabIndex = 4;
-            this.openFileButton.Text = "Open file";
-            this.openFileButton.UseVisualStyleBackColor = true;
-            this.openFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
+            openFileButton.Location = new System.Drawing.Point(15, 305);
+            openFileButton.Margin = new System.Windows.Forms.Padding(2);
+            openFileButton.Name = "openFileButton";
+            openFileButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            openFileButton.Size = new System.Drawing.Size(92, 54);
+            openFileButton.TabIndex = 4;
+            openFileButton.Text = "Open file";
+            openFileButton.UseVisualStyleBackColor = true;
+            openFileButton.Click += OpenFileButton_Click;
+            // 
+            // validateAgentsCheckBox
+            // 
+            validateAgentsCheckBox.AutoSize = true;
+            validateAgentsCheckBox.Location = new System.Drawing.Point(494, 335);
+            validateAgentsCheckBox.Name = "validateAgentsCheckBox";
+            validateAgentsCheckBox.Size = new System.Drawing.Size(187, 24);
+            validateAgentsCheckBox.TabIndex = 2;
+            validateAgentsCheckBox.Text = "Validate agents schema";
+            validateAgentsCheckBox.UseVisualStyleBackColor = true;
             // 
             // JsonApp
             // 
-            this.AllowDrop = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 646);
-            this.Controls.Add(this.openFileButton);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.validateButton);
-            this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "JsonApp";
-            this.Text = "JsonApp";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.ResumeLayout(false);
+            AllowDrop = true;
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(897, 808);
+            Controls.Add(validateAgentsCheckBox);
+            Controls.Add(openFileButton);
+            Controls.Add(groupBox2);
+            Controls.Add(resetButton);
+            Controls.Add(validateButton);
+            Controls.Add(groupBox1);
+            Margin = new System.Windows.Forms.Padding(2);
+            Name = "JsonApp";
+            Text = "JsonApp";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -160,6 +185,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox output;
         private System.Windows.Forms.Button openFileButton;
+        private System.Windows.Forms.TreeView jsonTreeView;
+        private System.Windows.Forms.CheckBox validateAgentsCheckBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 
