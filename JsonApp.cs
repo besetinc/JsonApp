@@ -5,6 +5,7 @@ using Newtonsoft.Json.Schema.Generation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -15,7 +16,15 @@ namespace JsonApp
         public JsonApp()
         {
             InitializeComponent();
+            toolTip1.SetToolTip(openFileButton, "Open a JSON file (Ctrl + O)");
+            toolTip1.SetToolTip(saveFileButton, "Save JSON to a file (Ctrl + S)");
+            toolTip1.SetToolTip(validateButton, "Validate JSON (Ctrl + Shift + V)");
+            toolTip1.SetToolTip(resetButton, "Reset application (Ctrl + Shift + R)");
+            toolTip1.SetToolTip(loadSchemaButton, "Load JSON schema (Ctrl + L)");
+            toolTip1.SetToolTip(formatJsonButton, "Format JSON (Ctrl + Shift + F)");
+            toolTip1.SetToolTip(minifyJsonButton, "Minify JSON (Ctrl + Shift + M)");
         }
+        private JSchema? loadedSchema;
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
             OpenJsonFile();
@@ -24,7 +33,7 @@ namespace JsonApp
         {
             OpenFileDialog ofd = new OpenFileDialog
             {
-                Filter = "JSON Source File|*.json"
+                Filter = "All files (*.*)|*.*|JSON files (*.json)|*.json"
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -36,7 +45,7 @@ namespace JsonApp
                 jsonTreeView.Nodes.Clear();
             }
         }
-        private void PrintOutput(string outputStr)
+        private void ShowMessage(string outputStr)
         {
             try
             {
@@ -54,6 +63,7 @@ namespace JsonApp
             output.Text = string.Empty;
             inputJson.Text = string.Empty;
             jsonTreeView.Nodes.Clear();
+            loadedSchema = null;
         }
         private void ValidateButton_Click(object sender, EventArgs e)
         {
@@ -63,7 +73,7 @@ namespace JsonApp
             }
             else
             {
-                PrintOutput("There is no .json file to validate. Please provide the file.");
+                ShowMessage("There is no .json file to validate. Please provide the file.");
             }
         }
         private void ValidateJson(string inputJson)
@@ -76,7 +86,7 @@ namespace JsonApp
                 // Check JSON syntax
                 JToken jsonToken = JToken.Parse(inputJson);
 
-                PrintOutput("JSON syntax is valid.");
+                ShowMessage("JSON syntax is valid.");
 
                 // Build JSON hierarchy
                 TreeNode rootNode = jsonTreeView.Nodes.Add("JSON");
@@ -85,26 +95,24 @@ namespace JsonApp
 
                 rootNode.ExpandAll();
 
-                // Validate against Agents schema if checkbox is checked
-                if (validateAgentsCheckBox.Checked)
+                if (loadedSchema != null)
                 {
-                    JSchemaGenerator generator = new JSchemaGenerator();
-                    JSchema schema = generator.Generate(typeof(Agents));
+                    IList<string> validationErrors;
 
-                    IList<string> validationMessages = new List<string>();
+                    bool isValid = jsonToken.IsValid(loadedSchema, out validationErrors);
 
-                    if (jsonToken.IsValid(schema, out validationMessages))
+                    if (isValid)
                     {
-                        PrintOutput("JSON matches Agents schema.");
+                        ShowMessage("JSON is valid against the loaded schema.");
                     }
                     else
                     {
-                        foreach (string message in validationMessages)
-                        {
-                            PrintOutput(message);
-                        }
+                        ShowMessage("JSON is NOT valid against the loaded schema.");
 
-                        PrintOutput("JSON does NOT match Agents schema.");
+                        foreach (string error in validationErrors)
+                        {
+                            ShowMessage(error);
+                        }
                     }
                 }
             }
@@ -112,12 +120,12 @@ namespace JsonApp
             {
                 jsonTreeView.Nodes.Clear();
 
-                PrintOutput("JSON syntax is NOT valid.");
-                PrintOutput("Found a problem: " + e.Message);
+                ShowMessage("JSON syntax is NOT valid.");
+                ShowMessage("Found a problem: " + e.Message);
             }
             catch (Exception e)
             {
-                PrintOutput("Found a problem: " + e.Message);
+                ShowMessage("Found a problem: " + e.Message);
             }
         }
         private void PopulateTreeView(JToken token, TreeNode parentNode)
@@ -125,6 +133,7 @@ namespace JsonApp
             if (token is JObject jsonObject)
             {
                 parentNode.Text += " {}";
+                parentNode.ForeColor = Color.ForestGreen;
                 foreach (JProperty property in jsonObject.Properties())
                 {
                     TreeNode propertyNode = parentNode.Nodes.Add(property.Name);
@@ -134,6 +143,7 @@ namespace JsonApp
             else if (token is JArray jsonArray)
             {
                 parentNode.Text += $" [{jsonArray.Count}]";
+                parentNode.ForeColor = Color.RoyalBlue;
                 for (int i = 0; i < jsonArray.Count; i++)
                 {
                     TreeNode arrayNode = parentNode.Nodes.Add($"[{i}]");
@@ -145,18 +155,129 @@ namespace JsonApp
                 parentNode.Text += ": " + token.ToString(Formatting.None);
             }
         }
-        public class Agents
+        private void loadSchemaButton_Click(object sender, EventArgs e)
         {
-            [JsonProperty("machineName")]
-            public string Name { get; set; }
-            [JsonProperty("machineNumber")]
-            public int Number { get; set; }
-            [JsonProperty("isOnline")]
-            public bool Online { get; set; }
-            [JsonProperty("isReserved")]
-            public bool Reserved { get; set; }
-            [JsonProperty("isReservedBy")]
-            public string ReservedBy { get; set; }
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Title = "Select JSON Schema";
+                dialog.Filter = "All files (*.*)|*.*|JSON files (*.json)|*.json";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string schemaJson = File.ReadAllText(dialog.FileName);
+
+                        JSchema schema = JSchema.Parse(schemaJson);
+                        loadedSchema = schema;
+
+                        ShowMessage("Schema loaded successfully: " +
+                                    Path.GetFileName(dialog.FileName));
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowMessage("Failed to load schema: " + ex.Message);
+                    }
+                }
+            }
+        }
+        private void saveFileButton_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Title = "Save JSON File";
+                dialog.Filter = "JSON files (*.json)|*.json";
+                dialog.DefaultExt = "json";
+                dialog.AddExtension = true;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string filePath = Path.ChangeExtension(dialog.FileName, ".json");
+
+                        File.WriteAllText(filePath, inputJson.Text);
+
+                        ShowMessage("File saved successfully: " +
+                                    Path.GetFileName(filePath));
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowMessage("Failed to save file: " + ex.Message);
+                    }
+                }
+            }
+        }
+        private void formatJsonButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                JToken jsonToken = JToken.Parse(inputJson.Text);
+
+                inputJson.Text = jsonToken.ToString(Formatting.Indented);
+
+                ShowMessage("JSON formatted successfully.");
+            }
+            catch (JsonReaderException ex)
+            {
+                ShowMessage("JSON syntax is NOT valid.");
+                ShowMessage(ex.Message);
+            }
+        }
+
+        private void minifyJsonButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                JToken jsonToken = JToken.Parse(inputJson.Text);
+
+                inputJson.Text = jsonToken.ToString(Formatting.None);
+
+                ShowMessage("JSON minified successfully.");
+            }
+            catch (JsonReaderException ex)
+            {
+                ShowMessage("JSON syntax is NOT valid.");
+                ShowMessage(ex.Message);
+            }
+        }
+        private void JsonApp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Modifiers == Keys.Control && e.KeyCode == Keys.O)
+            {
+                openFileButton.PerformClick();
+            }
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
+            {
+                saveFileButton.PerformClick();
+            }
+            else if (e.Control && e.Shift && e.KeyCode == Keys.V)
+            {
+                validateButton.PerformClick();
+            }
+            else if (e.Modifiers == (Keys.Control | Keys.Shift) && e.KeyCode == Keys.R)
+            {
+                resetButton.PerformClick();
+            }
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.L)
+            {
+                loadSchemaButton.PerformClick();
+            }
+            else if (e.Modifiers == (Keys.Control | Keys.Shift) && e.KeyCode == Keys.F)
+            {
+                formatJsonButton.PerformClick();
+            }
+            else if (e.Modifiers == (Keys.Control | Keys.Shift) && e.KeyCode == Keys.M)
+            {
+                minifyJsonButton.PerformClick();
+            }
+            else
+            {
+                return;
+            }
+
+            e.SuppressKeyPress = true;
+            e.Handled = true;
         }
     }
 }
